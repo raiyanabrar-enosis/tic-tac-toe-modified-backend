@@ -13,7 +13,8 @@ routes.post("/game/save", DbController.newGame);
 
 routes.post("/game/steps", GameController.getSteps);
 
-routes.get("/game/new/:boardsize", GameController.newGame);
+routes.get("/game/new", GameController.newGame);
+routes.get("/game/remove", GameController.removeGame);
 routes.post("/game/move/create", GameController.addMove);
 
 // ----------------- API END --------------------

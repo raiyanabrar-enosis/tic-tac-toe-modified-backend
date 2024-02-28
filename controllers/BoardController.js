@@ -93,14 +93,16 @@ export default class BoardController {
 
 	addMove = (move, player) => {
 		this.board[move[0]][move[1]] = player;
+		const isWinner = this.checkWinner(player);
+		const isDraw = !isWinner && this.checkDraw();
 
 		return {
 			move: move,
 			player: player,
 			nextTurn: player == 1 ? 2 : 1,
 			boardstate: JSON.parse(JSON.stringify(this.board)),
-			isWinner: this.checkWinner(player),
-			isDraw: this.checkDraw(),
+			isWinner: isWinner,
+			isDraw: isDraw,
 		};
 	};
 }

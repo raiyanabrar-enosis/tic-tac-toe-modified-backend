@@ -10,6 +10,14 @@ const gameSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		isMultiplayer: {
+			type: Boolean,
+			default: false,
+		},
+		winnerName: {
+			type: String,
+			default: "",
+		},
 		moves: {
 			type: Number,
 			default: 0,

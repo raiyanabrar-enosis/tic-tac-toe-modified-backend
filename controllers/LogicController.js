@@ -1,9 +1,11 @@
 import BoardController from "./BoardController.js";
 
 export default class LogicController {
-	constructor(N) {
+	constructor(N, multiplayer) {
 		this.move = 1;
 		this.steps = [];
+		this.isMultiplayer = multiplayer;
+		this.isFilled = false;
 		this.boardSize = N;
 		this.currentGame = null;
 	}
@@ -13,6 +15,18 @@ export default class LogicController {
 		this.currentGame = new BoardController(this.boardSize);
 
 		return this.currentGame.getBoard();
+	}
+
+	getCurrentGameBoard() {
+		return this.currentGame.getBoard();
+	}
+
+	checkFilled() {
+		return this.isFilled;
+	}
+
+	setFilled() {
+		this.isFilled = true;
 	}
 
 	getSteps() {
