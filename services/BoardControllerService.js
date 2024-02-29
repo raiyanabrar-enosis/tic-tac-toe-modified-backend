@@ -1,4 +1,4 @@
-export default class BoardController {
+export default class BoardControllerService {
 	constructor(size) {
 		this.boardsize = size;
 		this.board = this.initBoard(size);

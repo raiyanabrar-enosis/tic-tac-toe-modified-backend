@@ -14,6 +14,10 @@ const gameSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
+		participatedPlayers: {
+			type: Array,
+			default: ["Player 1", "Player 2"],
+		},
 		winnerName: {
 			type: String,
 			default: "",
@@ -25,6 +29,9 @@ const gameSchema = new mongoose.Schema(
 		steps: {
 			type: Array,
 			default: [],
+		},
+		endBoardState: {
+			type: Array,
 		},
 		createdAt: {
 			type: Date,

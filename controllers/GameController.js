@@ -1,4 +1,4 @@
-import LogicController from "./LogicController.js";
+import LogicControllerService from "../services/LogicControllerService.js";
 
 let game = []; // Stores game instances
 
@@ -70,6 +70,7 @@ export default class GameController {
 	}
 
 	// Adds current move to the game instance containing the id
+	// If game is over, remove the instance
 	static async addMove(req, res) {
 		const move = req.body.move;
 		const id = req.body.id;
@@ -77,6 +78,9 @@ export default class GameController {
 
 		const gameInstance = game.find((g) => g.id == id);
 		const moveData = gameInstance.instance.addMove(move, player);
+
+		if (moveData.isWinner || moveData.isDraw)
+			GameController.removeGame(gameInstance.id);
 
 		res.status(200).send({ message: "Move created", data: moveData });
 	}
@@ -90,16 +94,34 @@ export default class GameController {
 			.send({ message: "Success", data: gameInstance?.instance.getSteps() });
 	}
 
-	static async removeGame(req, res) {
-		const id = req.query.id;
+	static async setName(req, res) {
+		const id = req.body.id;
+		const name = req.body.name;
+		const playerNo = req.body.playerNo;
 
+		const iid = setInterval(() => {
+			const gameInstance = game.find((g) => g.id == id);
+			if (gameInstance) {
+				gameInstance.instance.setName(name, playerNo);
+				clearInterval(iid);
+			}
+		}, 200);
+
+		res.status(200).send({
+			message: "Success",
+			data: name,
+		});
+	}
+
+	static async removeGame(id) {
+		console.log("Removing game with ID ", id);
 		game = game.filter((g) => g.id != id);
 
-		res.status(200).send({ message: "Success" });
+		console.log("Successfully removed game with ID ", id);
 	}
 
 	static setupSinglePlayerGame(boardSize, isMultiplayer) {
-		const curgame = new LogicController(boardSize, isMultiplayer);
+		const curgame = new LogicControllerService(boardSize, isMultiplayer);
 		const newgame = {
 			id: Date.now(),
 			instance: curgame,
