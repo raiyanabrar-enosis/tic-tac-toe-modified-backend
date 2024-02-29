@@ -1,6 +1,6 @@
 import LogicController from "./LogicController.js";
 
-let game = [];
+let game = []; // Stores game instances
 
 export default class GameController {
 	static async newGame(req, res) {
@@ -16,6 +16,7 @@ export default class GameController {
 			let currentBoard;
 
 			if (multiplayerGames.length) {
+				// Returns the first available multiplayer game
 				for (let i = 0; i < multiplayerGames.length; i++) {
 					const cGame = multiplayerGames[i];
 
@@ -26,7 +27,7 @@ export default class GameController {
 						break;
 					}
 
-					// No available games found, so make one
+					// No available games found, so make one in the end
 					if (i == multiplayerGames.length - 1) {
 						currentGame = GameController.setupSinglePlayerGame(
 							boardSize,
@@ -68,6 +69,7 @@ export default class GameController {
 		}
 	}
 
+	// Adds current move to the game instance containing the id
 	static async addMove(req, res) {
 		const move = req.body.move;
 		const id = req.body.id;
