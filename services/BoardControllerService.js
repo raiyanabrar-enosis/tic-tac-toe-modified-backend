@@ -7,13 +7,13 @@ export default class BoardControllerService {
 	initBoard = (n) => {
 		let board = [];
 
-		for (let i = 0; i < n; i++) {
+		for (let col = 0; col < n; col++) {
 			let innerboard = [];
 
-			for (let j = 0; j < n; j++) {
+			for (let colItem = 0; colItem < n; colItem++) {
 				innerboard.push(0);
 			}
-			board[i] = innerboard;
+			board[col] = innerboard;
 		}
 
 		return board;
@@ -26,10 +26,10 @@ export default class BoardControllerService {
 	checkRowsMatch = (player) => {
 		let isMatching = true;
 
-		for (let i = 0; i < this.boardsize; i++) {
+		for (let column = 0; column < this.boardsize; column++) {
 			isMatching = true;
-			for (let j = 0; j < this.boardsize; j++) {
-				if (player != this.board[i][j]) isMatching = false;
+			for (let colItem = 0; colItem < this.boardsize; colItem++) {
+				if (player != this.board[column][colItem]) isMatching = false;
 			}
 
 			if (isMatching) return true;
@@ -41,10 +41,10 @@ export default class BoardControllerService {
 	checkColumnsMatch = (player) => {
 		let isMatching = true;
 
-		for (let i = 0; i < this.boardsize; i++) {
+		for (let column = 0; column < this.boardsize; column++) {
 			isMatching = true;
-			for (let j = 0; j < this.boardsize; j++) {
-				if (player != this.board[j][i]) isMatching = false;
+			for (let colItem = 0; colItem < this.boardsize; colItem++) {
+				if (player != this.board[colItem][column]) isMatching = false;
 			}
 
 			if (isMatching) return true;
@@ -56,8 +56,8 @@ export default class BoardControllerService {
 	checkLeftDiagonalsMatch = (player) => {
 		let isMatching = true;
 
-		for (let i = 0; i < this.boardsize; i++) {
-			if (player != this.board[i][i]) isMatching = false;
+		for (let column = 0; column < this.boardsize; column++) {
+			if (player != this.board[column][column]) isMatching = false;
 		}
 
 		return isMatching;
@@ -66,8 +66,9 @@ export default class BoardControllerService {
 	checkRightDiagonalsMatch = (player) => {
 		let isMatching = true;
 
-		for (let i = 0; i < this.boardsize; i++) {
-			if (player != this.board[i][this.boardsize - i - 1]) isMatching = false;
+		for (let column = 0; column < this.boardsize; column++) {
+			if (player != this.board[column][this.boardsize - column - 1])
+				isMatching = false;
 		}
 
 		return isMatching;
@@ -83,9 +84,9 @@ export default class BoardControllerService {
 	};
 
 	checkDraw = () => {
-		for (let i = 0; i < this.boardsize; i++) {
-			for (let j = 0; j < this.boardsize; j++) {
-				if (this.board[i][j] == 0) return false;
+		for (let column = 0; column < this.boardsize; column++) {
+			for (let colItem = 0; colItem < this.boardsize; colItem++) {
+				if (this.board[column][colItem] == 0) return false;
 			}
 		}
 		return true;

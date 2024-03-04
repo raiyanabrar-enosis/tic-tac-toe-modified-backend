@@ -9,8 +9,6 @@ const routes = Router();
 
 routes.get("/", HomeController.home);
 
-routes.post("/game/steps", GameController.getSteps);
-
 routes.get("/game/new", GameController.newGame);
 routes.get("/game/remove", GameController.removeGame);
 routes.post("/game/name", GameController.setName);

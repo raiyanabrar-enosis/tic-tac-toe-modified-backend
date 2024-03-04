@@ -31,3 +31,4 @@ coverage
 bun.lockb
 .vscode/extensions.json
 package-lock.json
+.env

@@ -1,10 +1,12 @@
 import express from "express";
 import cors from "cors";
 import routes from "./routes/index.js";
-import models, { connectDb } from "./utils/mongo.js";
+import { connectDb } from "./utils/mongo.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT;
 
 app.use(express.json());
 app.use(cors());
@@ -25,7 +27,6 @@ import WebSocket, { WebSocketServer } from "ws";
 const wss = new WebSocketServer({ port: 6969 });
 
 wss.on("connection", function connection(ws, req) {
-	const ip = req.socket.remoteAddress;
 	ws.on("error", console.error);
 
 	ws.on("message", function message(data, isBinary) {

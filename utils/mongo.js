@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 import Game from "../models/games.js";
-import { mongoURI } from "./globals.js";
 
 const connectDb = () => {
+	const mongoURI = process.env.MONGO_URI;
 	console.log("connecting to " + mongoURI);
 	return mongoose.connect(mongoURI);
 };

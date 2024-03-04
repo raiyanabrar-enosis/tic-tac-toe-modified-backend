@@ -17,18 +17,22 @@ export default class GameController {
 
 			if (multiplayerGames.length) {
 				// Returns the first available multiplayer game
-				for (let i = 0; i < multiplayerGames.length; i++) {
-					const cGame = multiplayerGames[i];
+				for (
+					let gameIndex = 0;
+					gameIndex < multiplayerGames.length;
+					gameIndex++
+				) {
+					const cGame = multiplayerGames[gameIndex];
 
 					if (!cGame.instance.checkFilled()) {
-						currentGame = multiplayerGames[i];
+						currentGame = multiplayerGames[gameIndex];
 						currentBoard = currentGame.instance.getCurrentGameBoard();
 						currentGame.instance.setFilled();
 						break;
 					}
 
 					// No available games found, so make one in the end
-					if (i == multiplayerGames.length - 1) {
+					if (gameIndex == multiplayerGames.length - 1) {
 						currentGame = GameController.setupSinglePlayerGame(
 							boardSize,
 							isMultiplayer
@@ -85,15 +89,6 @@ export default class GameController {
 		res.status(200).send({ message: "Move created", data: moveData });
 	}
 
-	static async getSteps(req, res) {
-		const id = req.body.id;
-		const gameInstance = game.find((g) => g.id == id);
-
-		res
-			.status(200)
-			.send({ message: "Success", data: gameInstance?.instance.getSteps() });
-	}
-
 	static async setName(req, res) {
 		const id = req.body.id;
 		const name = req.body.name;
@@ -114,10 +109,7 @@ export default class GameController {
 	}
 
 	static async removeGame(id) {
-		console.log("Removing game with ID ", id);
 		game = game.filter((g) => g.id != id);
-
-		console.log("Successfully removed game with ID ", id);
 	}
 
 	static setupSinglePlayerGame(boardSize, isMultiplayer) {
