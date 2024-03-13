@@ -24,7 +24,7 @@ connectDb().then(async () => {
 // WEBSOCKETS ---------------
 import WebSocket, { WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({ port: 6969 });
+const wss = new WebSocketServer({ port: 8888 });
 
 wss.on("connection", function connection(ws, req) {
 	ws.on("error", console.error);

@@ -86,6 +86,8 @@ export default class GameController {
 		if (moveData.isWinner || moveData.isDraw)
 			GameController.removeGame(gameInstance.id);
 
+		console.log(req.body, moveData);
+
 		res.status(200).send({ message: "Move created", data: moveData });
 	}
 

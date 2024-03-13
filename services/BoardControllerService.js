@@ -97,6 +97,10 @@ export default class BoardControllerService {
 		const isWinner = this.checkWinner(player);
 		const isDraw = !isWinner && this.checkDraw();
 
+		return this.setMoveData(move, player, isWinner, isDraw);
+	};
+
+	setMoveData = (move, player, isWinner, isDraw) => {
 		return {
 			move: move,
 			player: player,
