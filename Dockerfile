@@ -17,6 +17,6 @@ ENV SERVER_PORT=8080
 RUN npm install
 
 EXPOSE 8080
-EXPOSE 6969
+EXPOSE 8888
 
 CMD [ "node", "index.js" ]
